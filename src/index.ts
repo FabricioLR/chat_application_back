@@ -1,5 +1,20 @@
 import "dotenv/config"
-import app from "./app"
 const PORT = process.env.PORT || 4000
 
-app.listen(PORT, console.log("Server running on port " + PORT))
+import app from "./app"
+
+app.io.on("connection", socket => {
+    console.log(socket.id)
+
+    socket.send({
+        type: "message",
+        content: "hello"
+    })
+
+    socket.on("disconnect", () => {
+        console.log("disconnected")
+    })
+
+})
+
+app.server.listen(PORT, () => console.log("Server running on port " + PORT))

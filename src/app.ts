@@ -3,6 +3,7 @@ import cors from "cors"
 import router from "./router"
 import { Server } from "socket.io"
 import http from "http"
+import sequelize from "./database"
 
 class App{
     express: any
@@ -16,6 +17,7 @@ class App{
 
         this.middlewares()
         this.routes()
+        this.connection()
     }
     middlewares(){
         this.express.use(express.json())
@@ -24,6 +26,9 @@ class App{
     }
     routes(){
         this.express.use(router)
+    }
+    async connection(){
+        await sequelize.sync({})
     }
 }
 

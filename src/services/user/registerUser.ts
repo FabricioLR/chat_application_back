@@ -10,13 +10,21 @@ type RegisterUserData = {
 
 async function registerUser(data: RegisterUserData){
     try {
-        const alreadyRegistered = await User.findOne({
+        const nameAlreadyRegistered = await User.findOne({
+            where: {
+                name: data.name
+            }
+        })
+
+        const emailAlreadyRegistered = await User.findOne({
             where: {
                 email: data.email
             }
         })
 
-        if(alreadyRegistered) throw "user already exists"
+        if(nameAlreadyRegistered) throw "name already exists";
+
+        if(emailAlreadyRegistered) throw "email already exists"
 
         const password = await Hash(data.password)
 
@@ -38,7 +46,8 @@ async function registerUser(data: RegisterUserData){
 
         return [user, token]
     } catch (error) {
-        throw "registration failed"
+        console.log(error)
+        throw error
     }
 }
 

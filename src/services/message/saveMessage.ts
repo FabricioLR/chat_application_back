@@ -20,7 +20,8 @@ async function SaveMessage(data: SaveMessageData){
         const messageC = await Message.create({
             fromId: data.userId,
             toId: contact.contactId,
-            message: data.message
+            message: data.message,
+            contactId: data.contactId
         })
 
         if (!messageC) throw "save message failed"
@@ -34,7 +35,7 @@ async function SaveMessage(data: SaveMessageData){
         return message
     } catch (error) {
         console.log(error)
-        throw "save message failed"
+        throw error
     }
 }
 

@@ -28,6 +28,7 @@ const User = sequelize.define<UserModel>("users", {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
     },
     profile_image: {
         type: DataTypes.STRING,

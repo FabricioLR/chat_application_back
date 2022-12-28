@@ -26,7 +26,7 @@ async function authenticateUser(data: AuthenticateUserData){
 
         return [user, token]
     } catch (error) {
-        throw "authentication failed"
+        throw error
     }
 }
 

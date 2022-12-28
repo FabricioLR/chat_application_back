@@ -23,11 +23,12 @@ class MessageController{
         const { id } = response.locals.user
 
         try {
-            const [myMessages, messagesForme] = await GetMessages({
+            const messages = await GetMessages({
                 userId: id
+                
             })
 
-            return response.status(200).send({ myMessages, messagesForme })
+            return response.status(200).send({ messages })
         } catch (error) {
             return response.status(400).send({ error })
         }

@@ -6,6 +6,7 @@ interface MessageModel extends Model<InferAttributes<MessageModel>, InferCreatio
     id?: string
     fromId: string
     toId: string
+    contactId: string
     message: string
 }
 
@@ -29,6 +30,10 @@ const Message = sequelize.define<MessageModel>("messages", {
             model: User,
             key: "id"
         }
+    },
+    contactId: {
+        type: DataTypes.UUID,
+        allowNull: false,
     },
     message: {
         type: DataTypes.TEXT,

@@ -5,12 +5,12 @@ import GetContacts from "../services/contact/getContacts";
 class ContactsController{
     async AddContact(request: Request, response: Response){
         const { id } = response.locals.user
-        const { contactId } = request.body
+        const { name } = request.body
 
         try{
             const contact = await createContact({
                 userId: id,
-                contactId
+                name
             })
 
             return response.status(200).send({ contact })
@@ -25,8 +25,6 @@ class ContactsController{
             const contacts = await GetContacts({
                 userId: id
             })
-
-            console.log(contacts)
 
             return response.status(200).send({ contacts })
         } catch(error){

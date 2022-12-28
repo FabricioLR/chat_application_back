@@ -16,8 +16,7 @@ async function GetUser(data: GetUserData) {
 
         return user
     } catch (error) {
-        throw "get user failed"
-
+        throw error
     }
 }
 

@@ -26,14 +26,14 @@ async function GetContacts(data: GetContactsData){
                 },
                 {
                     model: User,
-                    as: "public"
+                    as: "contact"
                 }
             ]
         })
         
         return contacts
     } catch (error) {
-        throw "get contacts error"
+        throw error
     }
 }
 

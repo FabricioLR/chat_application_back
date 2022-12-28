@@ -9,6 +9,7 @@ const router: Router = Router()
 
 router.post("/Register", UserController.Register)
 router.post("/Authenticate", UserController.Authenticate)
+router.get("/AuthenticateByToken", verifyToken, UserController.AuthenticateByToken)
 
 router.post("/AddContact", verifyToken, contactController.AddContact)
 router.get("/GetContacts", verifyToken, contactController.GetContacts)

@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import authenticateUser from "../services/user/authenticateUser";
+import GetUser from "../services/user/getUser";
 import registerUser from "../services/user/registerUser";
 
 class UserController{
@@ -25,6 +26,19 @@ class UserController{
             })
 
             return response.status(200).send({ token, user })
+        } catch (error) {
+            return response.status(400).send({ error })
+        }
+    }
+    async AuthenticateByToken(request: Request, response: Response){
+        const { id } = response.locals.user;
+
+        try {
+            const user = await GetUser({
+                userId: id
+            })
+
+            return response.status(200).send({ user })
         } catch (error) {
             return response.status(400).send({ error })
         }

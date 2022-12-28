@@ -2,7 +2,7 @@ import "dotenv/config"
 import { Request, Response, NextFunction} from "express"
 import { verify, Secret } from "jsonwebtoken"
 
-const verifyToken = (request: Request, response: Response, next: NextFunction) => {
+function verifyToken(request: Request, response: Response, next: NextFunction){
     try {
         const token = request.headers.token as string
         const SECRET = process.env.SECRET as Secret
@@ -14,10 +14,9 @@ const verifyToken = (request: Request, response: Response, next: NextFunction) =
         verify(token, SECRET, (err, decoded) => {
             if (err) return response.status(400).send({ error: "token invalid" })
 
-            response.locals.id = decoded
+            response.locals.user = decoded
             return next()
         })
-
     } catch (error) {
         return response.status(400).send({ error: "validation token error" })
     }

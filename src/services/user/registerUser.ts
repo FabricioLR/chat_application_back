@@ -32,7 +32,10 @@ async function registerUser(data: RegisterUserData){
         user.password = ""
         user.email = ""
 
-        const token = await Token(user.id)
+        const token = await Token({
+            id: user.id,
+            publicId: user.publicId
+        })
 
         return [user, token]
     } catch (error) {

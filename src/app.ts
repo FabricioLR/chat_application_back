@@ -28,7 +28,8 @@ class App{
         this.express.use(router)
     }
     async connection(){
-        await sequelize.sync({})
+        require("./models/associations")
+        await sequelize.sync({ force: true })
     }
 }
 

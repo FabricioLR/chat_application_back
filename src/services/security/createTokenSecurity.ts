@@ -3,8 +3,13 @@ import { sign, Secret } from "jsonwebtoken"
 
 const SECRET = process.env.SECRET as Secret
 
-async function Token(id: string | undefined) {
-    return sign({ id }, SECRET, { expiresIn: 86400 })
+type TokenData = {
+    id: string | undefined
+    publicId: string | undefined
+}
+
+async function Token(data: TokenData){
+    return sign({ id: data.id, publicId: data.publicId }, SECRET, { expiresIn: 86400 })
 }
 
 export default Token

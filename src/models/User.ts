@@ -1,11 +1,12 @@
 import sequelize from "../database";
-import { DataTypes, Model, InferAttributes, InferCreationAttributes } from "sequelize"
+import { DataTypes, Model, InferAttributes, InferCreationAttributes } from "sequelize";
 
-interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
+export interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
     id?: string;
+    publicId?: string;
     name: string;
-    email?: string;
-    password?: string;
+    email: string;
+    password: string;
     profile_image: string;
 }
 
@@ -14,6 +15,12 @@ const User = sequelize.define<UserModel>("users", {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+    publicId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        unique: true,
         defaultValue: DataTypes.UUIDV4
     },
     password: {
@@ -32,7 +39,10 @@ const User = sequelize.define<UserModel>("users", {
     profile_image: {
         type: DataTypes.STRING,
         allowNull: false,
+    }},
+    {
+        freezeTableName: true
     }
-})
+)
 
 export default User

@@ -12,15 +12,15 @@ async function authenticateUser(data: AuthenticateUserData){
         const user = await User.findOne({
             where: {
                 email: data.email
-            },
-            
+            }
         })
-
-        console.log(user)
 
         if (!await Compare({ password: data.password, userPassword: user!.password }) || !user) throw "invalid email or password"
 
-        const token = await Token(user.id)
+        const token = await Token({
+            id: user.id,
+            publicId: user.publicId
+        })
 
         user.password = ""
         user.email = ""

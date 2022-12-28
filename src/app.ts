@@ -6,7 +6,7 @@ import http from "http"
 import sequelize from "./database"
 
 class App{
-    express: any
+    express: express.Application
     public io: Server
     public server: http.Server
 
@@ -29,7 +29,7 @@ class App{
     }
     async connection(){
         require("./models/associations")
-        await sequelize.sync({ force: true })
+        await sequelize.sync({})
     }
 }
 

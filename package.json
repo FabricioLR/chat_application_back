@@ -1,17 +1,8 @@
 {
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "transform": {
-      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!variables/.*)"
-    ]
+    "test": "jest --coverage --collectCoverageFrom='./src/**'",
+    "ts-node": "ts-node"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

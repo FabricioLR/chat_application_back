@@ -1,12 +1,12 @@
 import sequelize from "../database";
-import { DataTypes, Model, InferAttributes, InferCreationAttributes } from "sequelize";
+import { DataTypes, Model, InferAttributes, InferCreationAttributes } from "sequelize"
 import User from "./User";
 
-export interface MessageModel extends Model<InferAttributes<MessageModel>, InferCreationAttributes<MessageModel>> {
-    id?: string;
-    userId: string;
-    publicId: string;
-    message: string;
+interface MessageModel extends Model<InferAttributes<MessageModel>, InferCreationAttributes<MessageModel>>{
+    id?: string
+    fromId: string
+    toId: string
+    message: string
 }
 
 const Message = sequelize.define<MessageModel>("messages", {
@@ -16,14 +16,18 @@ const Message = sequelize.define<MessageModel>("messages", {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
-    userId: {
-        type: DataTypes.UUID,
-    },
-    publicId: {
+    fromId: {
         type: DataTypes.UUID,
         references: {
             model: User,
-            key: "publicId"
+            key: "id"
+        }
+    },
+    toId: {
+        type: DataTypes.UUID,
+        references: {
+            model: User,
+            key: "id"
         }
     },
     message: {
@@ -34,5 +38,6 @@ const Message = sequelize.define<MessageModel>("messages", {
         freezeTableName: true
     }
 )
+
 
 export default Message

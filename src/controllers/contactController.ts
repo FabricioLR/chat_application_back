@@ -4,12 +4,11 @@ import GetContacts from "../services/contact/getContacts";
 
 class ContactsController{
     async AddContact(request: Request, response: Response){
-        const { id, publicId } = response.locals.user
+        const { id } = response.locals.user
         const { contactId } = request.body
 
         try{
             const contact = await createContact({
-                publicId,
                 userId: id,
                 contactId
             })

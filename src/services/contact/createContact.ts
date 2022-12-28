@@ -4,7 +4,6 @@ import { and } from "sequelize"
 
 type CreateContactData = {
     userId: string
-    publicId: string
     contactId: string
 }
 
@@ -12,7 +11,7 @@ async function createContact(data: CreateContactData){
     try {
         const userContact = await User.findOne({
             where: {
-                publicId: data.contactId,
+                id: data.contactId,
             }
         })
 
@@ -21,7 +20,7 @@ async function createContact(data: CreateContactData){
         const alreadyExist = await Contact.findOne({
             where: and(
                 { userId: data.userId },
-                { publicId: data.contactId }
+                { contactId: data.contactId }
             )
         })
     
@@ -30,11 +29,11 @@ async function createContact(data: CreateContactData){
         const contacts = await Contact.bulkCreate([ 
             {
                 userId: data.userId,
-                publicId: data.contactId
+                contactId: data.contactId
             },
             {
-                userId: (userContact.id as string),
-                publicId: data.publicId
+                userId: data.contactId,
+                contactId: data.userId
             }
         ])
 
@@ -51,13 +50,14 @@ async function createContact(data: CreateContactData){
                 },
                 {
                     model: User,
-                    as: "public"
+                    as: "contact"
                 }
             ]
         })
 
         return contact
     } catch (error) {
+        console.log(error)
         throw "create contact failed"
     }
 }

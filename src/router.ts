@@ -14,6 +14,6 @@ router.post("/AddContact", verifyToken, contactController.AddContact)
 router.get("/GetContacts", verifyToken, contactController.GetContacts)
 
 router.post("/SaveMessage", verifyToken, messageController.SaveMessage)
-router.post("/GetMessages", verifyToken, messageController.GetMessages)
+router.get("/GetMessages", verifyToken, messageController.GetMessages)
 
 export default router

@@ -18,8 +18,7 @@ async function authenticateUser(data: AuthenticateUserData){
         if (!await Compare({ password: data.password, userPassword: user!.password }) || !user) throw "invalid email or password"
 
         const token = await Token({
-            id: user.id,
-            publicId: user.publicId
+            id: user.id
         })
 
         user.password = ""

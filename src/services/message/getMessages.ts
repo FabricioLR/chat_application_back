@@ -20,11 +20,13 @@ async function GetMessages(data: GetMessagesData) {
             include: [
                 {
                     model: User,
-                    as: "to"
+                    as: "to",
+                    attributes: ["id", "name", "profile_image"]
                 },
                 {
                     model: User,
-                    as: "from"
+                    as: "from",
+                    attributes: ["id", "name", "profile_image"]
                 }
             ]
         })

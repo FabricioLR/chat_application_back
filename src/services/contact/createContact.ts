@@ -48,11 +48,14 @@ async function createContact(data: CreateContactData){
             include: [
                 {
                     model: User,
-                    as: "user1"
+                    as: "user1",
+                    attributes: ["id", "name", "profile_image"]
+                    
                 },
                 {
                     model: User,
-                    as: "user2"
+                    as: "user2",
+                    attributes: ["id", "name", "profile_image"]
                 }
             ]
         })

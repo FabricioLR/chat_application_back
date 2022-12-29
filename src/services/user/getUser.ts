@@ -9,7 +9,8 @@ async function GetUser(data: GetUserData) {
         const user = await User.findOne({
             where: {
                 id: data.userId
-            }
+            },
+            attributes: ["name", "id", "profile_image"]
         })        
 
         if (!user) throw "user not found"

@@ -17,9 +17,11 @@ async function SaveMessage(data: SaveMessageData){
 
         if (!contact) throw "contact not found"
 
+        if (data.userId != contact.user1Id && data.userId != contact.user2Id) throw "you cant save this message"
+
         const messageC = await Message.create({
             fromId: data.userId,
-            toId: contact.contactId,
+            toId: contact.user1Id == data.userId ? contact.user2Id : contact.user1Id,
             message: data.message,
             contactId: data.contactId
         })

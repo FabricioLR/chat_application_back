@@ -1,6 +1,6 @@
 import Contact from "../../models/Contact"
 import User from "../../models/User"
-import { and } from "sequelize"
+import { and, or } from "sequelize"
 
 type CreateContactData = {
     userId: string
@@ -9,50 +9,50 @@ type CreateContactData = {
 
 async function createContact(data: CreateContactData){
     try {
-        const userContact = await User.findOne({
+        const user = await User.findOne({
             where: {
                 name: data.name,
             }
         })
 
-        if (!userContact) throw "user not found"
+        if (!user) throw "user not found"
 
-        if (userContact.id == data.userId) throw "cannot add yourself"
+        if (user.id == data.userId) throw "cannot add yourself"
 
         const alreadyExist = await Contact.findOne({
-            where: and(
-                { userId: data.userId },
-                { contactId: userContact.id }
+            where: or(
+                {
+                    user1Id: data.userId,
+                    user2Id: (user.id as string)
+                },
+                {
+                    user1Id: (user.id as string),
+                    user2Id: data.userId
+                }
             )
-        })
+        })  
     
         if (alreadyExist) throw "contact already exist" 
     
-        const contacts = await Contact.bulkCreate([ 
-            {
-                userId: data.userId,
-                contactId: (userContact.id as string)
-            },
-            {
-                userId: (userContact.id as string),
-                contactId: data.userId
-            }
-        ])
+        const contactC = await Contact.create({
+            user1Id: data.userId,
+            user2Id: (user.id as string)
+        })
 
-        if (!contacts) throw "failed to create contact"
+        if (!contactC) throw "failed to create contact"
 
         const contact = await Contact.findOne({
             where: {
-                id: contacts[0].id,
+                id: contactC.id,
             },
             include: [
                 {
                     model: User,
-                    as: "user"
+                    as: "user1"
                 },
                 {
                     model: User,
-                    as: "contact"
+                    as: "user2"
                 }
             ]
         })

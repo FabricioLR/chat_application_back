@@ -3,18 +3,29 @@ const PORT = process.env.PORT || 4000
 
 import app from "./app"
 
-app.io.on("connection", socket => {
-    console.log(socket.id)
+type UserData = {
+    [key: string]: string
+}
 
-    socket.send({
-        type: "message",
-        content: "hello"
+const users: UserData = {}
+
+app.io.on("connection", (socket) => {
+    socket.on("whoami", (name: string) => {
+        if (name){
+            users[name] = socket.id
+        }
     })
 
     socket.on("disconnect", () => {
-        console.log("disconnected")
+        const user = Object.keys(users).filter(name => users[name] == socket.id)
+        delete users[user[0]]
     })
 
+    socket.on("message", (data) => {
+        if (users[data.to]){
+            socket.to(users[data.to]).emit("contact message", data)
+        }
+    })
 })
 
 app.server.listen(PORT, () => console.log("Server running on port " + PORT))

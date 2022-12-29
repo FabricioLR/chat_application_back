@@ -4,8 +4,8 @@ import User from "./User";
 
 interface ContactModel extends Model<InferAttributes<ContactModel>, InferCreationAttributes<ContactModel>>{
     id?: string
-    userId: string
-    contactId: string
+    user1Id: string
+    user2Id: string
 }
 
 const Contact = sequelize.define<ContactModel>("contacts", {
@@ -15,14 +15,14 @@ const Contact = sequelize.define<ContactModel>("contacts", {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
-    userId: {
+    user1Id: {
         type: DataTypes.UUID,
         references: {
             model: User,
             key: "id"
         }
     },
-    contactId: {
+    user2Id: {
         type: DataTypes.UUID,
         references: {
             model: User,

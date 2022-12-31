@@ -46,7 +46,6 @@ async function registerUser(data: RegisterUserData){
 
         return [user, token]
     } catch (error) {
-        console.log(error)
         throw error
     }
 }

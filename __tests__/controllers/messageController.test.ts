@@ -8,7 +8,7 @@ import Contact from "../../src/models/Contact"
 import Message from "../../src/models/Message"
 
 describe("teste de funcoes relacionadas ao contact controller", () => {
-    jest.setTimeout(60000)
+    /* jest.setTimeout(60000)
     beforeAll(async () => {
         jest.setTimeout(60000)
         require("../../src/models/associations")
@@ -22,7 +22,7 @@ describe("teste de funcoes relacionadas ao contact controller", () => {
         await Message.destroy({ where: {}, force: true })
     })
 
-    /* it("deve salvar mensagem quando enviada a um contato existente", async () => {
+    it("deve salvar mensagem quando enviada a um contato existente", async () => {
         jest.setTimeout(60000)
         const response = await request(app.server).post("/Register").send({
             name: "teste",
@@ -55,7 +55,7 @@ describe("teste de funcoes relacionadas ao contact controller", () => {
         expect(response2.statusCode).toBe(200)
         expect(response3.statusCode).toBe(200)
         expect(response4.statusCode).toBe(200)
-    }) */
+    })
 
     it("deve retornar todas as mensagens do usuario", async () => {
         jest.setTimeout(60000)
@@ -95,5 +95,5 @@ describe("teste de funcoes relacionadas ao contact controller", () => {
         expect(response3.statusCode).toBe(200)
         expect(response4.statusCode).toBe(200)
         expect(response6.statusCode).toBe(200)
-    })
+    }) */
 })

@@ -10,6 +10,8 @@ type RegisterUserData = {
 
 async function registerUser(data: RegisterUserData){
     try {
+        if (data.email == "" || data.password == "" || data.name == "") throw "credentials cant be empty"
+
         const nameAlreadyRegistered = await User.findOne({
             where: {
                 name: data.name

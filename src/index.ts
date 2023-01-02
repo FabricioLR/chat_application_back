@@ -14,14 +14,17 @@ app.io.on("connection", (socket) => {
         if (name){
             users[name] = socket.id
         }
+        console.log("connection", users)
     })
 
     socket.on("disconnect", () => {
         const user = Object.keys(users).filter(name => users[name] == socket.id)
         delete users[user[0]]
+        console.log("disconnection", users)
     })
 
     socket.on("message", (data) => {
+        console.log("message", users)
         if (users[data.to]){
             socket.to(users[data.to]).emit("contact message", data)
         }

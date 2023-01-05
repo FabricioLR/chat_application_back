@@ -10,16 +10,17 @@ type UserData = {
 const users: UserData = {}
 
 app.io.on("connection", (socket) => {
+    socket.removeAllListeners()
     socket.on("whoami", (name: string) => {
-        if (name){
-            users[name] = socket.id
-        }
+        users[name] = socket.id
+        app.io.sockets.emit("onlines", users)
         console.log("connection", users)
     })
 
     socket.on("disconnect", () => {
         const user = Object.keys(users).filter(name => users[name] == socket.id)
         delete users[user[0]]
+        app.io.sockets.emit("onlines", users)
         console.log("disconnection", users)
     })
 

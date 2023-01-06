@@ -23,7 +23,8 @@ async function SaveMessage(data: SaveMessageData){
             fromId: data.userId,
             toId: contact.user1Id == data.userId ? contact.user2Id : contact.user1Id,
             message: data.message,
-            contactId: data.contactId
+            contactId: data.contactId,
+            viewed: false
         })
 
         if (!messageC) throw "save message failed"

@@ -28,7 +28,8 @@ async function GetMessages(data: GetMessagesData) {
                     as: "from",
                     attributes: ["id", "name", "profile_image"]
                 }
-            ]
+            ],
+            order: [[ "createdAt", "ASC" ]]
         })
 
         if (!messages) throw "get messages failed"

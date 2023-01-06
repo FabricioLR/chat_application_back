@@ -13,22 +13,27 @@ app.io.on("connection", (socket) => {
     socket.removeAllListeners()
     socket.on("whoami", (name: string) => {
         users[name] = socket.id
-        app.io.sockets.emit("onlines", users)
+        app.io.sockets.emit("server onlines", users)
         console.log("connection", users)
     })
 
     socket.on("disconnect", () => {
         const user = Object.keys(users).filter(name => users[name] == socket.id)
         delete users[user[0]]
-        app.io.sockets.emit("onlines", users)
+        app.io.sockets.emit("server onlines", users)
         console.log("disconnection", users)
     })
 
     socket.on("message", (data) => {
         console.log("message", users)
         if (users[data.to]){
-            socket.to(users[data.to]).emit("contact message", data)
+            socket.to(users[data.to]).emit("server message", data)
         }
+    })
+
+    socket.on("updateMessage", (data) => {
+        console.log(data)
+        socket.to(users[data.to]).emit("server updateMessage", data)
     })
 })
 

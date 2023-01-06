@@ -8,6 +8,7 @@ interface MessageModel extends Model<InferAttributes<MessageModel>, InferCreatio
     toId: string
     contactId: string
     message: string
+    viewed: boolean
 }
 
 const Message = sequelize.define<MessageModel>("messages", {
@@ -38,6 +39,11 @@ const Message = sequelize.define<MessageModel>("messages", {
     message: {
         type: DataTypes.TEXT,
         allowNull: false,
+    },
+    viewed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }},
     {
         freezeTableName: true

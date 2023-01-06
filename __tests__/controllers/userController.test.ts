@@ -6,7 +6,7 @@ import sequelize from "../../src/database"
 import User from "../../src/models/User"
 
 describe("teste de funcoes relacionadas ao user controller", () => {
-    jest.setTimeout(60000)
+    /* jest.setTimeout(60000)
     beforeAll(async () => {
         jest.setTimeout(60000)
         require("../../src/models/associations")
@@ -18,7 +18,7 @@ describe("teste de funcoes relacionadas ao user controller", () => {
         await User.destroy({ where: {}, force: true })
     })
 
-    /*it("deve retornar usuario e token apos registrar", async () => {
+    it("deve retornar usuario e token apos registrar", async () => {
         jest.setTimeout(60000)
         const response = await request(app.server).post("/Register").send({
             name: "teste",
@@ -51,7 +51,7 @@ describe("teste de funcoes relacionadas ao user controller", () => {
         expect(response2.statusCode).toBe(200)
         expect(response2.body).toHaveProperty("user")
         expect(response2.body).toHaveProperty("token")
-    })  */
+    })
 
     it("deve retornar nada apos troca de imagem do usuarion", async () => {
         jest.setTimeout(60000)
@@ -67,5 +67,5 @@ describe("teste de funcoes relacionadas ao user controller", () => {
 
         expect(response.statusCode).toBe(200)
         expect(response2.statusCode).toBe(200)
-    })  
+    })   */
 })

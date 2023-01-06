@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import router from "./router"
-import { Server, ServerOptions } from "socket.io"
+import { Server } from "socket.io"
 import http from "http"
 import sequelize from "./database"
 
@@ -35,6 +35,7 @@ class App{
     async connection(){
         require("./models/associations")
         await sequelize.sync({})
+        //await sequelize.sync({ force: true})
     }
 }
 

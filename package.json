@@ -2,9 +2,9 @@
   "scripts": {
     "dev": "ts-node src/index.ts",
     "test": "jest --coverage --collectCoverageFrom='./src/**'",
-    "ts-node": "ts-node",
     "build": "npm install && tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "clear": "ts-node src/config/clear.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

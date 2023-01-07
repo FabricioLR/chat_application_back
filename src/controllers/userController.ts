@@ -2,12 +2,13 @@ import { Request, Response } from "express"
 import authenticateUser from "../services/user/authenticateUser";
 import GetUser from "../services/user/getUser";
 import registerUser from "../services/user/registerUser";
+import SetToken from "../services/user/setToken";
 import updateProfileImage from "../services/user/updateProfileImage";
 import updateUserCredentials from "../services/user/updateUserCredentials";
 
 class UserController{
     async Register(request: Request, response: Response){
-        const { name, email, password } = request.body;
+        const { name, email, password } = request.body
         
         try {
             const [user, token] = await registerUser({
@@ -20,7 +21,7 @@ class UserController{
         }
     }
     async Authenticate(request: Request, response: Response){
-        const { email, password } = request.body;
+        const { email, password } = request.body
 
         try {
             const [user, token] = await authenticateUser({
@@ -33,7 +34,7 @@ class UserController{
         }
     }
     async AuthenticateByToken(request: Request, response: Response){
-        const { id } = response.locals.user;
+        const { id } = response.locals.user
 
         try {
             const user = await GetUser({
@@ -46,7 +47,7 @@ class UserController{
         }
     }
     async ChangeUserImage(request: Request, response: Response){
-        const { id } = response.locals.user;
+        const { id } = response.locals.user
         const { url } = response.locals.file
 
         try {
@@ -60,8 +61,8 @@ class UserController{
         }
     }
     async ChangeUserCredential(request: Request, response: Response){
-        const { id } = response.locals.user;
-        const { name, password } = request.body;
+        const { id } = response.locals.user
+        const { name, password } = request.body
 
         try {
             const user = await updateUserCredentials({
@@ -69,6 +70,20 @@ class UserController{
             })
 
             return response.status(200).send({ user })
+        } catch (error) {
+            return response.status(400).send({ error })
+        }
+    }
+    async SetToken(request: Request, response: Response){
+        const { id } = response.locals.user
+        const { token } = request.body
+
+        try {
+            await SetToken({
+                userId: id, token
+            })
+
+            return response.status(200).send()
         } catch (error) {
             return response.status(400).send({ error })
         }

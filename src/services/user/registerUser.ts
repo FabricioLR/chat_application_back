@@ -33,8 +33,7 @@ async function registerUser(data: RegisterUserData){
         const user = await User.create({
             name: data.name,
             email: data.email,
-            password,
-            profile_image: ""
+            password
         })
 
         if (!user) throw "user could not be created"

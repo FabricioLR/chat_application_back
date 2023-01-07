@@ -6,7 +6,8 @@ interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttri
     name: string;
     email: string;
     password: string;
-    profile_image: string;
+    profile_image?: string;
+    token?: string;
 }
 
 const User = sequelize.define<UserModel>("users", {
@@ -32,7 +33,11 @@ const User = sequelize.define<UserModel>("users", {
     },
     profile_image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+    },
+    token: {
+        type: DataTypes.STRING,
+        allowNull: true
     }},
     {
         freezeTableName: true

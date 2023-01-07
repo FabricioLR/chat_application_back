@@ -31,9 +31,9 @@ app.io.on("connection", (socket) => {
         }
     })
 
-    socket.on("updateMessage", (data) => {
+    socket.on("updateMessageStatus", (data) => {
         console.log(data)
-        socket.to(users[data.to]).emit("server updateMessage", data)
+        socket.to(users[data.to]).emit("server updateMessageStatus", data)
     })
 })
 

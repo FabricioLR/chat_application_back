@@ -7,8 +7,12 @@ type PushNotificationData = {
     body: string
 }
 
+//PushNotification({ name: "", title: "", body: ""})
+
 async function PushNotification(data: PushNotificationData){
     try {
+        if (data.name == "") throw "user name cant be empty"
+        
         const user = await User.findOne({
             where: {
                 name: data.name
@@ -29,6 +33,8 @@ async function PushNotification(data: PushNotificationData){
                 body: data.body
             }
         })
+
+        console.log("notification", response.data)
 
         if (response.status != 200) throw "send notification failed"
     } catch (error) {

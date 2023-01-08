@@ -2,6 +2,7 @@ import "dotenv/config"
 const PORT = process.env.PORT || 4000
 
 import app from "./app"
+import PushNotification from "./services/notification/pushNotification"
 
 type UserData = {
     [key: string]: string
@@ -24,16 +25,18 @@ app.io.on("connection", (socket) => {
         console.log("disconnection", users)
     })
 
-    socket.on("message", (data) => {
-        console.log("message", users)
+    socket.on("message", async (data) => {
         if (users[data.to]){
             socket.to(users[data.to]).emit("server message", data)
+        } else {
+            await PushNotification({ name: data.to, title: "New Message", body: data.message })
         }
+        console.log("message", users)
     })
 
     socket.on("updateMessageStatus", (data) => {
-        console.log(data)
         socket.to(users[data.to]).emit("server updateMessageStatus", data)
+        console.log("update message status", data)
     })
 })
 

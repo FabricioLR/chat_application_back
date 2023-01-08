@@ -1,5 +1,5 @@
 {
-  "exclude": ["./coverage", "./dist", "__tests__", "jest.config.js"],
+  "exclude": ["./dist"],
   "ts-node": {
     "transpileOnly": true,
     "files": true
@@ -7,7 +7,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDir": "",
     "moduleResolution": "node",
     "checkJs": true,
     "outDir": "./dist",

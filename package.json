@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "test": "jest --coverage --collectCoverageFrom='./src/**'",
+    "dev": "set NODE_ENV=development&&ts-node src/index.ts",
+    "devStart": "set NODE_ENV=production&&ts-node src/index.ts",
+    "test": "set NODE_ENV=development&&vitest",
+    "coverage": "set NODE_ENV=development&&vitest run --coverage",
     "build": "npm install && tsc",
     "start": "node dist/index.js",
     "clear": "ts-node src/config/clear.ts",
@@ -36,6 +38,7 @@
     "jest": "^29.3.1",
     "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "vitest": "^0.26.3"
   }
 }

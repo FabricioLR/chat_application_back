@@ -40,5 +40,19 @@
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "vitest": "^0.26.3"
-  }
+  },
+  "name": "chat_application_back",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabricioLR/chat_application_back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabricioLR/chat_application_back/issues"
+  },
+  "homepage": "https://github.com/FabricioLR/chat_application_back#readme",
+  "description": ""
 }

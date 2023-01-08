@@ -29,9 +29,9 @@ app.io.on("connection", (socket) => {
         if (users[data.to]){
             socket.to(users[data.to]).emit("server message", data)
         } else {
-            await PushNotification({ name: data.to, title: "New Message", body: data.message })
+            await PushNotification({ name: data.to, title: "New Message From " + data.fromName, body: data.message })
         }
-        console.log("message", users)
+        console.log("message", data)
     })
 
     socket.on("updateMessageStatus", (data) => {

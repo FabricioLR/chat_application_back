@@ -21,6 +21,7 @@ router.get("/AuthenticateByToken", verifyToken, UserController.AuthenticateByTok
 router.post("/ChangeUserImage", verifyToken, Multer.single("file"), UploadImage, UserController.ChangeUserImage)
 router.post("/ChangeUserCredentials", verifyToken, UserController.ChangeUserCredential)
 router.post("/SetToken", verifyToken, UserController.SetToken)
+router.get("/RemoveToken", verifyToken, UserController.RemoveToken)
 
 router.post("/AddContact", verifyToken, contactController.AddContact)
 router.get("/GetContacts", verifyToken, contactController.GetContacts)

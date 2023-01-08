@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import authenticateUser from "../services/user/authenticateUser";
 import GetUser from "../services/user/getUser";
 import registerUser from "../services/user/registerUser";
+import RemoveToken from "../services/user/removeToken";
 import SetToken from "../services/user/setToken";
 import updateProfileImage from "../services/user/updateProfileImage";
 import updateUserCredentials from "../services/user/updateUserCredentials";
@@ -81,6 +82,19 @@ class UserController{
         try {
             await SetToken({
                 userId: id, token
+            })
+
+            return response.status(200).send()
+        } catch (error) {
+            return response.status(400).send({ error })
+        }
+    }
+    async RemoveToken(request: Request, response: Response){
+        const { id } = response.locals.user
+
+        try {
+            await RemoveToken({
+                userId: id
             })
 
             return response.status(200).send()

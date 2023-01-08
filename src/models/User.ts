@@ -7,7 +7,7 @@ interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttri
     email: string;
     password: string;
     profile_image?: string;
-    token?: string;
+    token?: string | null;
 }
 
 const User = sequelize.define<UserModel>("users", {

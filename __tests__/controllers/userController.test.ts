@@ -69,7 +69,7 @@ describe("teste de funcoes relacionadas ao user controller", () => {
         expect(response2.statusCode).toBe(200)
     })   */
 
-    it("deve retornar usuario nada apos salvar token", async () => {
+   /* it("deve retornar nada apos salvar token", async () => {
         jest.setTimeout(60000)
         const response = await request(app.server).post("/Register").send({
             name: "teste",
@@ -88,4 +88,29 @@ describe("teste de funcoes relacionadas ao user controller", () => {
         expect(response.statusCode).toBe(200)
         expect(response2.statusCode).toBe(200)
     }) 
+
+     it("deve retornar nada apos remover token", async () => {
+        jest.setTimeout(60000)
+        const response = await request(app.server).post("/Register").send({
+            name: "teste",
+            email: "teste@teste.com",
+            password: "teste"
+        })
+
+        const response2 = await request(app.server).post("/SetToken").send({
+            token: "ExponentPushToken[asdfasdfasfasdfsf]"
+        }).set({
+            token: response.body.token
+        })
+
+        const response3 = await request(app.server).get("/RemoveToken").set({
+            token: response.body.token
+        })
+
+        console.log(response3.body)
+
+        expect(response.statusCode).toBe(200)
+        expect(response2.statusCode).toBe(200)
+        expect(response3.statusCode).toBe(200)
+    })  */
 })

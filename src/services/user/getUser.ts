@@ -1,10 +1,10 @@
-import User from "../../models/User"
+import User, { UserModel } from "../../models/User"
 
 type GetUserData = {
     userId: string
 }
 
-async function GetUser(data: GetUserData) {
+async function GetUser(data: GetUserData): Promise<UserModel> {
     try {
         const user = await User.findOne({
             where: {

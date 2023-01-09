@@ -1,4 +1,4 @@
-import User from "../../models/User";
+import User, { UserModel } from "../../models/User";
 import Token from "../security/createTokenSecurity";
 import Compare from "../security/verifyPasswordSecurity";
 
@@ -7,7 +7,12 @@ type AuthenticateUserData = {
     email: string;
 }
 
-async function authenticateUser(data: AuthenticateUserData){
+type AuthenticateUserResponse = [
+    user: UserModel,
+    token: string
+]
+
+async function authenticateUser(data: AuthenticateUserData): Promise<AuthenticateUserResponse> {
     try {
         if (data.email == "" || data.password == "") throw "credentials cant be empty"
 

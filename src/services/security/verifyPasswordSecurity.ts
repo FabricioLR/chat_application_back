@@ -5,7 +5,7 @@ type CompareData = {
     userPassword: string | undefined
 }
 
-async function Compare(data: CompareData){
+async function Compare(data: CompareData): Promise<boolean>{
     const userPassword = data.userPassword as string
 
     if (!await compare(data.password, userPassword)) return false

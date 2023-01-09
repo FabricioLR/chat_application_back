@@ -1,4 +1,4 @@
-import User from "../../models/User";
+import User, { UserModel } from "../../models/User";
 import Token from "../security/createTokenSecurity";
 import Hash from "../security/hashPasswordSecurity";
 
@@ -8,7 +8,12 @@ type RegisterUserData = {
     email: string;
 }
 
-async function registerUser(data: RegisterUserData){
+type RegisterUserResponse = [
+    user: UserModel,
+    token: string
+]
+
+async function registerUser(data: RegisterUserData): Promise<RegisterUserResponse>{
     try {
         if (data.email == "" || data.password == "" || data.name == "") throw "credentials cant be empty"
 
@@ -28,6 +33,8 @@ async function registerUser(data: RegisterUserData){
 
         if(emailAlreadyRegistered) throw "email already exists"
 
+        if (data.password.length < 6) throw "password must be at least 6 characters"
+
         const password = await Hash(data.password)
 
         const user = await User.create({
@@ -46,7 +53,7 @@ async function registerUser(data: RegisterUserData){
         })
 
         return [user, token]
-    } catch (error) {
+    } catch (error: any) {
         throw error
     }
 }

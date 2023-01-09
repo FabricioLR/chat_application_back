@@ -4,7 +4,7 @@ type RemoveTokenData = {
     userId: string
 }
 
-async function RemoveToken(data: RemoveTokenData){
+async function RemoveToken(data: RemoveTokenData): Promise<void>{
     try {
         const update = await User.update({
             token: null

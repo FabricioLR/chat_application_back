@@ -5,7 +5,7 @@ type SetTokenData = {
     token: string
 }
 
-async function SetToken(data: SetTokenData){
+async function SetToken(data: SetTokenData): Promise<void>{
     try {
         if (!data.token.includes("ExponentPushToken")) throw "invalid expo token"
 

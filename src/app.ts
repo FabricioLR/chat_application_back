@@ -35,7 +35,6 @@ class App{
     async connection(){
         require("./models/associations")
         await sequelize.sync({})
-        //await sequelize.sync({ force: true})
     }
 }
 

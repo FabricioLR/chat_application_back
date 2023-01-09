@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import User from "../../models/User"
 
 type PushNotificationData = {
@@ -6,10 +6,16 @@ type PushNotificationData = {
     title: string
     body: string
 }
+type PushNotificationResponse = {
+    data: {
+        status: string
+        id: string
+    }
+}
 
-//PushNotification({ name: "", title: "", body: ""})
+//PushNotification({ name: "Samuel", title: "new message from fabricio", body: "fabricio - estou de olho em voces"})
 
-async function PushNotification(data: PushNotificationData){
+async function PushNotification(data: PushNotificationData): Promise<PushNotificationResponse> {
     try {
         if (data.name == "") throw "user name cant be empty"
         
@@ -37,8 +43,10 @@ async function PushNotification(data: PushNotificationData){
         console.log("notification", response.data)
 
         if (response.status != 200) throw "send notification failed"
-    } catch (error) {
-        console.log(error)
+
+        return response.data
+    } catch (error: any) {
+        return error
     }
 }
 

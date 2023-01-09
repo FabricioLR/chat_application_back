@@ -1,11 +1,11 @@
-import User from "../../models/User"
+import User, { UserModel } from "../../models/User"
 
 type UpdateProdileImageData = {
     url: string
     userId: string
 }
 
-async function updateProfileImage(data: UpdateProdileImageData){
+async function updateProfileImage(data: UpdateProdileImageData): Promise<UserModel>{
     try {
         const update = await User.update({
             profile_image: data.url
@@ -23,6 +23,8 @@ async function updateProfileImage(data: UpdateProdileImageData){
             },
             attributes: ["name", "id", "profile_image"]
         })
+
+        if (!user) throw "user not found"
 
         return user
     } catch (error) {

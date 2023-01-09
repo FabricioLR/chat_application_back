@@ -6,9 +6,10 @@ import RemoveToken from "../services/user/removeToken";
 import SetToken from "../services/user/setToken";
 import updateProfileImage from "../services/user/updateProfileImage";
 import updateUserCredentials from "../services/user/updateUserCredentials";
+import UserControllerInterface from "./interfaces/userControllerInterface";
 
-class UserController{
-    async Register(request: Request, response: Response){
+class UserController implements UserControllerInterface{
+    async Register(request: Request, response: Response): Promise<Response>{
         const { name, email, password } = request.body
         
         try {
@@ -21,7 +22,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async Authenticate(request: Request, response: Response){
+    async Authenticate(request: Request, response: Response): Promise<Response>{
         const { email, password } = request.body
 
         try {
@@ -34,7 +35,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async AuthenticateByToken(request: Request, response: Response){
+    async AuthenticateByToken(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
 
         try {
@@ -47,7 +48,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async ChangeUserImage(request: Request, response: Response){
+    async ChangeUserImage(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { url } = response.locals.file
 
@@ -61,7 +62,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async ChangeUserCredential(request: Request, response: Response){
+    async ChangeUserCredential(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { name, password } = request.body
 
@@ -75,7 +76,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async SetToken(request: Request, response: Response){
+    async SetToken(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { token } = request.body
 
@@ -89,7 +90,7 @@ class UserController{
             return response.status(400).send({ error })
         }
     }
-    async RemoveToken(request: Request, response: Response){
+    async RemoveToken(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
 
         try {

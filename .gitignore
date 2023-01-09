@@ -1,6 +1,7 @@
 node_modules
 yarn-error.log
 src/config/clear.ts
+src/config/query.ts
 jest.config.js
 coverage
 .env

@@ -1,4 +1,4 @@
-import User from "../../models/User"
+import User, { UserModel } from "../../models/User"
 import Hash from "../security/hashPasswordSecurity"
 
 type UpdateUserCredentialsData = {
@@ -7,8 +7,7 @@ type UpdateUserCredentialsData = {
     name: string
 }
 
-async function updateUserCredentials(data: UpdateUserCredentialsData){
-    console.log(data)
+async function updateUserCredentials(data: UpdateUserCredentialsData): Promise<UserModel>{
     try {
         if (!data.name && !data.password) throw "credentials must be provided"
 
@@ -38,6 +37,8 @@ async function updateUserCredentials(data: UpdateUserCredentialsData){
             },
             attributes: ["name", "profile_image", "id"]
         })
+
+        if (!user) throw "user not found"
 
         return user
     } catch (error) {

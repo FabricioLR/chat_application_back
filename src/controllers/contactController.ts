@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import createContact from "../services/contact/createContact";
 import GetContacts from "../services/contact/getContacts";
+import ContactControllerInterface from "./interfaces/contactControllerInterface";
 
-class ContactsController{
-    async AddContact(request: Request, response: Response){
+class ContactController implements ContactControllerInterface{
+    async AddContact(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { name } = request.body
 
@@ -18,7 +19,7 @@ class ContactsController{
             return response.status(400).send({ error })
         }
     }
-    async GetContacts(request: Request, response: Response){
+    async GetContacts(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
 
         try{
@@ -33,4 +34,4 @@ class ContactsController{
     }
 }
 
-export default new ContactsController()
+export default new ContactController()

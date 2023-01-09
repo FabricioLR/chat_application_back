@@ -7,7 +7,7 @@ type TokenData = {
     id: string | undefined
 }
 
-async function Token(data: TokenData){
+function Token(data: TokenData): string{
     return sign({ id: data.id }, SECRET, { expiresIn: 86400 })
 }
 

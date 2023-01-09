@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import GetMessages from "../services/message/getMessages";
 import SaveMessage from "../services/message/saveMessage";
 import UpdateMessageStatus from "../services/message/updateMessageStatus";
+import MessageControllerInterface from "./interfaces/messageControllerInterface";
 
-class MessageController{
-    async SaveMessage(request: Request, response: Response){
+class MessageController implements MessageControllerInterface{
+    async SaveMessage(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { message, contactId } = request.body
 
@@ -20,7 +21,7 @@ class MessageController{
             return response.status(400).send({ error })
         }
     }
-    async GetMessages(request: Request, response: Response){
+    async GetMessages(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
 
         try {
@@ -34,7 +35,7 @@ class MessageController{
             return response.status(400).send({ error })
         }
     }
-    async UpdateMessageStatus(request: Request, response: Response){
+    async UpdateMessageStatus(request: Request, response: Response): Promise<Response>{
         const { id } = response.locals.user
         const { contactId } = request.body
 

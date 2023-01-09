@@ -1,7 +1,7 @@
 import sequelize from "../database";
 import { DataTypes, Model, InferAttributes, InferCreationAttributes } from "sequelize";
 
-interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
+export interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
     id?: string;
     name: string;
     email: string;
